@@ -1,0 +1,14 @@
+[
+	{
+		"login":"eduardo",
+		"nome":"Eduardo Monteiro",
+		"password":"12345",
+		"email":"dudumonteiro@gmail.com"
+	},
+        {
+		"login":"marcelo",
+		"nome":"Marcelo Parrela",
+		"password":"54321",
+		"email":"marcelo@gmail.com"
+        }
+]

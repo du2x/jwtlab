@@ -1,0 +1,10 @@
+    <div class="container" ng-ctrl="HomeController as ctrl">
+      <form class="form-signin" ng-submit="signin()">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" ng-model="user.email" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" ng-model="user.password" class="form-control" placeholder="Password"  required>
+        <input type="submit" class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in">
+      </form>
+    </div> <!-- /container -->
