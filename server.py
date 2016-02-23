@@ -82,4 +82,4 @@ def restricted():
 	return "Welcome %s. This message is restricted. \n" % g.user
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, template_folder='static')
