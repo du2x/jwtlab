@@ -9,7 +9,7 @@ from config import token_timeout, jwt_algorithm
 import jwt
 from jwt.exceptions import DecodeError, ExpiredSignature
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='static')
 try:
 	app.config['SECRET_KEY'] = open('secret_key.txt', 'rb').read() # you may not commit secret_key.txt
 except:
@@ -82,4 +82,4 @@ def restricted():
 	return "Welcome %s. This message is restricted. \n" % g.user
 
 if __name__ == '__main__':
-    app.run(debug=True, template_folder='static')
+    app.run(debug=True)

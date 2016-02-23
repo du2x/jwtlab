@@ -32,6 +32,7 @@ var app = angular.module('myApp', ['ngStorage', 'ngRoute'])
 	       'responseError': function (response) {
 	           if (response.status === 401 || response.status === 403) {
 	               $location.path('/signin');
+
 	           }
 	           return $q.reject(response);
 	       }
@@ -88,11 +89,11 @@ app.factory('Auth', ['$http', '$localStorage', 'urls', function ($http, $localSt
 app.controller('HomeController', ['$rootScope', '$scope', '$location', '$localStorage', 'Auth',
        function ($rootScope, $scope, $location, $localStorage, Auth) {
            function successAuth(res) {
+               $rootScope.error = '';
                $localStorage.token = res;
                $location.path('/restricted');
            }
-           $scope.signin = function () {
-               console.log('poha');
+           $scope.signin = function () {               
                var formData = {
                    email: $scope.user.email,
                    password: $scope.user.password
@@ -109,11 +110,10 @@ app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls',
 
        $http.get(urls.BASE + '/restricted')
            .success(function(res){$scope.msg = res})
-           .error(function(){$rootScope.error = 'Failed to fetch restricted content.'});
-
+           .error(function(res){$rootScope.error = 'Failed to fetch restricted content: ' + res.message});
        $scope.logout = function () {
            Auth.logout(function () {
-               $location.path('/#');
+               $location.path('/');
            });
        };           
   }]);
