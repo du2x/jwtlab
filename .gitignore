@@ -21,4 +21,5 @@ var/
 .installed.cfg
 *.egg
 
-
+# secret key
+secret_key.txt
