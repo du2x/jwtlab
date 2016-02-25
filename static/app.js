@@ -49,7 +49,6 @@ app.factory('Auth', ['$http', '$localStorage', 'urls', function ($http, $localSt
                $http.post(urls.BASE + '/signin', data).success(success).error(error)
            },
            logout: function (success) {
-               tokenClaims = {};
                delete $localStorage.token;
                success();
            }
@@ -76,7 +75,7 @@ app.controller('HomeController', ['$rootScope', '$scope', '$location', '$localSt
            $scope.token = $localStorage.token;
        }]);
 
-app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls', '$location', 'Auth', function ($rootScope, $scope, $http, urls, $location, Auth) {
+app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls', 'Auth', function ($rootScope, $scope, $http, urls, Auth) {
        $http.get(urls.BASE + '/restricted')
            .success(function(res){$scope.msg = res})
            .error(function(res){$rootScope.error = 'Failed to fetch restricted content: ' + res.message});
@@ -87,7 +86,7 @@ app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls',
        };           
   }]);
 
-app.controller('PublicController', ['$rootScope', '$scope', '$http', 'urls', '$location', function ($rootScope, $scope, $http, urls, $location) {
+app.controller('PublicController', ['$rootScope', '$scope', '$http', 'urls', function ($rootScope, $scope, $http, urls) {
        $http.get(urls.BASE + '/public')
            .success(function(res){$scope.msg = res})
            .error(function(res){$rootScope.error = 'Failed to fetch public content: ' + res.message});
