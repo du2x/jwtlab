@@ -64,6 +64,11 @@ def parse_token(req):
 def home():
 	return render_template('index.html')
 
+# curl -X GET http://localhost:5000/public"
+@app.route('/public', methods=['GET'])
+def public():
+	return "This is the public area.\n" 
+
 
 # curl -X POST -d "email=admin@gmail.com&password=admin" http://localhost:5000/signin
 @app.route('/signin', methods=['POST'])
