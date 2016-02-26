@@ -10,10 +10,13 @@ The main usage for JWT may be for authentication/authorization purposes but it c
 
 ## How to run JWTLAB?
 
-1. run the Flask app
+1. install requirements
+`
+pip install -r requirements.txt
+`
+2. run the Flask app
 `
 python server.py
 `
-
-2. access http://localhost:5000 with your browser.
-3. to login use the credentials in users.json.
+3. access http://localhost:5000 with your browser.
+4. to login use the credentials in users.json.
