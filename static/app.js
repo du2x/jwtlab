@@ -48,7 +48,7 @@ app.factory('Auth', ['$http', '$localStorage', 'urls', function ($http, $localSt
            signin: function (data, success, error) {
                $http.post(urls.BASE + '/signin', data).success(success).error(error)
            },
-           logout: function (success) {
+           logout: function (success) {               
                delete $localStorage.token;
                success();
            }
@@ -75,13 +75,13 @@ app.controller('HomeController', ['$rootScope', '$scope', '$location', '$localSt
            $scope.token = $localStorage.token;
        }]);
 
-app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls', 'Auth', function ($rootScope, $scope, $http, urls, Auth) {
+app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls', '$location', 'Auth', function ($rootScope, $scope, $http, urls, $location, Auth) {
        $http.get(urls.BASE + '/restricted')
            .success(function(res){$scope.msg = res})
            .error(function(res){$rootScope.error = 'Failed to fetch restricted content: ' + res.message});
        $scope.logout = function () {
             Auth.logout(function () {              
-              window.location.href = '/';
+              $location.url('/');
            });
        };           
   }]);

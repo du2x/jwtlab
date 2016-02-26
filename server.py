@@ -45,7 +45,7 @@ def authenticate(user, pwd):
 def create_token(user):
 	payload = {
 		# subject
-		'sub': user['email'],
+		'sub': user['name'],
 		# issued at
 		'iat': datetime.utcnow(),
 		#expiry
@@ -80,6 +80,7 @@ def login():
 	else:
 		return "Unauthorized", 401
 
+
 # curl -X GET http://localhost:5000/restricted -H "Authorization: Bearer $token"
 @app.route('/restricted', methods=['GET'])
 @jwt_required
@@ -87,4 +88,4 @@ def restricted():
 	return "Welcome %s. This message is restricted. \n" % g.user
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
