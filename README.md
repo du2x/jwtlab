@@ -14,9 +14,11 @@ The main usage for JWT may be for authentication/authorization purposes but it c
 `
 pip install -r requirements.txt
 `
-2. run the Flask app
+2. create a file secret_key.txt and put any contents there. it will be your secret key.
+3. run the Flask app
 `
 python server.py
 `
-3. access http://localhost:5000 with your browser.
-4. to login use the credentials in users.json.
+4. access http://localhost:5000 with your browser.
+5. to login use the credentials in users.json.
+
