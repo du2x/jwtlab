@@ -81,7 +81,7 @@ app.controller('RestrictedController', ['$rootScope', '$scope', '$http', 'urls',
            .error(function(res){$rootScope.error = 'Failed to fetch restricted content: ' + res.message});
        $scope.logout = function () {
             Auth.logout(function () {              
-              $location.url('/');
+              $location.path('/');
            });
        };           
   }]);

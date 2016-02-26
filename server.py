@@ -11,7 +11,8 @@ from jwt.exceptions import DecodeError, ExpiredSignature
 
 app = Flask(__name__, template_folder='static')
 try:
-	app.config['SECRET_KEY'] = open('secret_key.txt', 'rb').read() # you may not commit secret_key.txt
+	# you may not commit secret_key.txt
+	app.config['SECRET_KEY'] = open('secret_key.txt', 'rb').read()
 except:
 	print 'Error: No secret key.'
 
@@ -42,13 +43,14 @@ def authenticate(user, pwd):
 			return create_token(usr)
 	return False
 
+
 def create_token(user):
 	payload = {
 		# subject
 		'sub': user['name'],
 		# issued at
 		'iat': datetime.utcnow(),
-		#expiry
+		# expiry
 		'exp': datetime.utcnow() + timedelta(minutes=token_timeout)
 	}
 	token = jwt.encode(payload, app.config['SECRET_KEY'], algorithm=jwt_algorithm)
@@ -60,14 +62,15 @@ def parse_token(req):
 	return jwt.decode(token, app.config['SECRET_KEY'], algorithms=jwt_algorithm)
 
 
-@app.route('/', methods=['GET',])
+@app.route('/', methods=['GET', ])
 def home():
 	return render_template('index.html')
+
 
 # curl -X GET http://localhost:5000/public"
 @app.route('/public', methods=['GET'])
 def public():
-	return "This is the public area.\n" 
+	return "This is the public area.\n"
 
 
 # curl -X POST -d "email=admin@gmail.com&password=admin" http://localhost:5000/signin
@@ -88,4 +91,4 @@ def restricted():
 	return "Welcome %s. This message is restricted. \n" % g.user
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True)
