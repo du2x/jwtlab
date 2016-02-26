@@ -16,4 +16,4 @@ python server.py
 `
 
 2. access http://localhost:5000 with your browser.
-3. 
+3. to login use the credentials in users.json.
