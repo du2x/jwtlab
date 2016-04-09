@@ -20,6 +20,7 @@ except IOError:
 	secret.write(app.config['SECRET_KEY'])
 	secret.close()
 
+# users data
 users = json.loads(open('users.json', 'rb').read().strip())
 
 # decorator that makes an endpoint require a valid jwt token
@@ -77,7 +78,7 @@ def public():
 	return "This is the public area.\n"
 
 
-# curl -X POST -d "email=scott@gmail.com&password=12345" http://localhost:5000/signin
+# curl -H "Content-Type: application/json" -X POST -d '{"email":"scott@gmail.com", "password":"12345"}' http://localhost:5000/signin
 @app.route('/signin', methods=['POST'])
 def login():
 	data = request.get_json()
