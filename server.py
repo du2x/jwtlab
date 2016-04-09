@@ -17,7 +17,7 @@ except IOError:
 	import random
 	app.config['SECRET_KEY'] = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
 	secret = file('secret_key.txt', 'w')
-	secret.write(SECRET_KEY)
+	secret.write(app.config['SECRET_KEY'])
 	secret.close()
 
 users = json.loads(open('users.json', 'rb').read().strip())
