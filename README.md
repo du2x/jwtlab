@@ -35,7 +35,7 @@ $ token=``curl -H "Content-Type: application/json" -X POST -d '{"email":"scott@g
 2. access a restricted area
 
 `
-curl -X GET http://localhost:5000/restricted -H "Authorization: Bearer $token"
+$ curl -X GET http://localhost:5000/restricted -H "Authorization: Bearer $token"
 `
 
 
