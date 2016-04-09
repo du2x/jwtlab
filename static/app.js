@@ -23,6 +23,9 @@ var app = angular.module('myApp', ['ngStorage', 'ngRoute'])
         otherwise({
             redirectTo: '/'
         });        
+
+	// puts the token at authorization header in every requests since there is a token in localstorage
+	// and redirects user to /signin when him receives a 401 or 403 response
 	$httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
 	   return {
 	       'request': function (config) {

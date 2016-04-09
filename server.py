@@ -13,12 +13,16 @@ app = Flask(__name__, template_folder='static')
 try:
 	# you may not commit secret_key.txt
 	app.config['SECRET_KEY'] = open('secret_key.txt', 'rb').read()
-except:
-	print 'Error: No secret key.'
+except IOError:
+	import random
+	app.config['SECRET_KEY'] = ''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+	secret = file('secret_key.txt', 'w')
+	secret.write(SECRET_KEY)
+	secret.close()
 
 users = json.loads(open('users.json', 'rb').read().strip())
 
-
+# decorator that makes an endpoint require a valid jwt token
 def jwt_required(f):
 	@wraps(f)
 	def decorated_function(*args, **kwargs):
@@ -28,15 +32,14 @@ def jwt_required(f):
 			payload = parse_token(request)
 			g.user = payload['sub']
 		except DecodeError:
-			response = jsonify(message='Token is invalid')
-			response.status_code = 401
-			return response
+			return jsonify(message='Token is invalid'), 401
 		except ExpiredSignature:
 			return jsonify(message='Token has expired'), 401
 		return f(*args, **kwargs)
 	return decorated_function
 
 
+# validate user and password agains users 'database'
 def authenticate(user, pwd):
 	for usr in users:
 		if usr['email'] == user and usr['password'] == pwd:
@@ -44,6 +47,7 @@ def authenticate(user, pwd):
 	return False
 
 
+# creates a jwt token loaded with user data
 def create_token(user):
 	payload = {
 		# subject
@@ -73,7 +77,7 @@ def public():
 	return "This is the public area.\n"
 
 
-# curl -X POST -d "email=admin@gmail.com&password=admin" http://localhost:5000/signin
+# curl -X POST -d "email=scott@gmail.com&password=12345" http://localhost:5000/signin
 @app.route('/signin', methods=['POST'])
 def login():
 	data = request.get_json()
