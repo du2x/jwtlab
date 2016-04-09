@@ -27,11 +27,13 @@ python server.py
 You can test it surfing with your browser or using curl:
 
 1. authenticate and store token
+
 `
 $ token=``curl -H "Content-Type: application/json" -X POST -d '{"email":"scott@gmail.com", "password":"12345"}' http://localhost:5000/signin``
 `
 
 2. access a restricted area
+
 `
 curl -X GET http://localhost:5000/restricted -H "Authorization: Bearer $token"
 `
