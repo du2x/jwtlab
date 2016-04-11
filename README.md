@@ -8,6 +8,14 @@ JWT (JSON Web Token) is compact and self-contained way for securely transmitting
 
 The main usage for JWT may be for authentication/authorization purposes but it can be used also for exchanging information between parties.
 
+## What does JWTLAB do?
+
+It runs a webserver (Flask) on at localhost, port 5000, exposing the following routes:
+
+1. `/signin`: receives a login/password combinades and validates it. If it's correct, the response will contain a authentication token.
+2. `/public`: a simple endpoint that doesn't demands a valid token.
+3. `/restricted`: a simple endpoint that demands a valid token.
+
 ## How to run JWTLAB?
 
 1. install requirements
