@@ -12,6 +12,7 @@ The main usage for JWT may be for authentication/authorization purposes but it c
 
 It runs a webserver (Flask) on localhost, port 5000, exposing the following routes:
 
+0. `/`: renders `index.html`, a html page that links to all other routes.
 1. `/signin`: receives a login/password combinades and validates it. If it's correct, the response will contain a authentication token.
 2. `/public`: a simple endpoint that doesn't demand a valid token.
 3. `/restricted`: a simple endpoint that demands a valid token.
