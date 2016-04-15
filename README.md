@@ -1,5 +1,7 @@
 # JWTLAB
 
+[![Join the chat at https://gitter.im/du2x/jwtlab](https://badges.gitter.im/du2x/jwtlab.svg)](https://gitter.im/du2x/jwtlab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is a simple example of JWT usage for authentication with python on server side and angularjs on client side.
 
 ## What is JWT?
